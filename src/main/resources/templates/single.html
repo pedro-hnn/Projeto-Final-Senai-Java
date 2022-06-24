@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script src= "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" ></script>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <title>Sistema de Anotações</title>
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" th:href="@{'/'}">SISTEMA DE ANOTAÇÕES</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{'/anotacoes'}">Lista de anotações</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{'/adicionar'}">Adicionar nova anotação</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div align="center" style="margin-top:6em;margin-bottom:6em;">
+
+    <div class="container" th:each="anotacao : ${singleAnotacao}">
+        <div class="row ">
+            <div class="col-lg-7 mx-auto">
+                <div class="card mt-2 mx-auto p-4 bg-light">
+                    <div class="card-body bg-light">
+                        <div class = "container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="icones">
+                                        <a th:href="@{'/editar/' + ${anotacao.id}}"><i title="Editar Anotação" class="fa-regular fa-pen-to-square editar-icon"></i></a>
+                                        <a th:href="@{'/delete/' + ${anotacao.id}}" onclick="return confirm('Deletar anotação?')" ><i title="Deletar Anotação" class="fa-regular fa-trash-can deletar-icon"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top:2em;">
+                                <div class="col-md-12">
+                                    <h2 th:text="${anotacao.titulo}">Título</h2>
+                                </div>
+                            </div>
+                            <br>
+                            <hr>
+                            <br>
+                            <div class="row" style="margin-top:1em;">
+                                <div class="col-md-12">
+                                    <p th:text="${anotacao.descricao}">Descrição</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
